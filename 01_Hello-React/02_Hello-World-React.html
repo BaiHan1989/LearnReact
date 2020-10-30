@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>Header</div>
+  <div id="app">app</div>
+  <div>Footer</div>
+
+  <!-- 添加React的依赖 -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 
+    注意事项：script标签中的jsx代码希望被解析，必须在script标签上添加一个type属性，值为 text/babel
+    通过babel来对jsx语法进行解析
+   -->
+  <script type="text/babel">
+    // render函数接收2个参数
+    // 第1个参数：jsx
+    // 第2个参数：要挂载的元素
+    ReactDOM.render(<h2>Hello World</h2>, document.getElementById("app"))
+  </script>
+</body>
+</html>
