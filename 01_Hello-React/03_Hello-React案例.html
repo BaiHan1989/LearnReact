@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- React 依赖 -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    let message = "Hello World"
+
+    function btnClick() {
+      message = "Hello React"
+      console.log(message)
+      render()
+    }
+
+    function render() {
+      // 多个元素，最外层只能有一个根元素
+      ReactDOM.render(
+        <div>
+          <h2>{message}</h2>
+          <button onClick={btnClick}>改变文本</button>
+        </div>, 
+        document.getElementById("app")
+      )
+    }
+
+    render()
+  </script>
+</body>
+</html>
