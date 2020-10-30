@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h2 class="title"></h2>
+  <button class="btn">改变文本</button>
+
+  <script>
+    // 命令式编程
+    // 定义变量
+    let message = "Hello World"
+    // 获取title元素
+    const titleEl = document.getElementsByClassName("title")[0]
+    titleEl.innerHTML = message
+
+    // 获取按钮元素
+    const btnEl = document.getElementsByClassName("btn")[0]
+    // 监听按钮点击
+    btnEl.addEventListener("click", e => {
+      message = "Hello React"
+      titleEl.innerHTML = message
+    })
+
+  </script>
+</body>
+</html>
