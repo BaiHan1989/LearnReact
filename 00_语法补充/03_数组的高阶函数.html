@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const names = ["张三", "李四", "王五", "赵六"]
+    /**
+     * map 接收2个参数
+     *  第1个参数：回调函数
+     *  回调函数接收3个参数：
+     *      第1个参数，数据中的元素
+     *      第2个参数，每个元素的索引
+     *      第3个参数，数组对象本身
+     *  第2个参数：绑定的对象
+     *  返回值是一个新的数组
+     */ 
+    
+     const newNames = names.map((item, index, array) => {
+      return item +  index + ""
+    })
+    console.log(newNames)
+  </script>
+</body>
+</html>
