@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    class Person {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
+
+      running() {
+        console.log("running")
+      }
+    }
+
+    class Student extends Person {
+      // 子类必须调用super来初始化父类
+      constructor(name, age, sno) {
+        super(name, age)
+        this.sno = sno
+      }
+    }
+
+    const student = new Student("YaoMing", 40, 110)
+    console.log(student.name, student.age, student.sno)
+    student.running()
+
+    class Teacher extends Person {
+      constructor(name, age, title) {
+        super(name, age)
+        this.title = title
+      }
+    }
+
+    const teacher = new Teacher("Lily", 28, "UI")
+    console.log(teacher.name, teacher.age, teacher.title)
+    teacher.running()
+
+  </script>
+</body>
+</html>
