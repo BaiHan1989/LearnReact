@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="../react/react.production.min.js"></script>
+  <script src="../react/react-dom.production.min.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+
+      constructor() {
+        super()
+        this.state = {
+          // 在 {} 可以正常显示的类型
+          name: "YaoMing", // String
+          age: 40, // Number
+          names: ["詹姆斯", "科比", "奥尼尔", "杜兰特"], // Array
+
+          // 在 {} 不能正常显示的类型
+          // 如果想要在 {} 显示以下内容
+          // 1. 可以拼接一个空字符串
+          // 2. 如果有toString() 方法可以进行调用
+          test1: null,  // null
+          test2: undefined,  // undefined
+          test3: true,    // Boolean
+          flag: true,
+
+          // 对象类型不能作为jsx的子类，直接放入 {} 会报错
+          friend: {
+            name: "superman",
+            age: 200
+          }
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>{this.state.name}</h2>
+            <h2>{this.state.age}</h2>
+            <h2>{this.state.names}</h2>
+
+            <h2>{this.state.test1 + ""}</h2>
+            <h2>{this.state.test2 + ""}</h2>
+            <h2>{this.state.test3.toString()}</h2>
+            <h2>{this.state.flag ? "你好啊" : null}</h2>
+
+            {/* <h2>{this.state.friend}</h2> */}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"))
+  </script>
+</body>
+</html>
