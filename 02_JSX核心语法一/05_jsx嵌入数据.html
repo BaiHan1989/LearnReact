@@ -8,8 +8,8 @@
 <body>
   <div id="app"></div>
 
-  <script src="../react/react.production.min.js"></script>
-  <script src="../react/react-dom.production.min.js"></script>
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
   <script src="../react/babel.min.js"></script>
 
   <script type="text/babel">
@@ -27,6 +27,7 @@
           // 如果想要在 {} 显示以下内容
           // 1. 可以拼接一个空字符串
           // 2. 如果有toString() 方法可以进行调用
+          // 3. String(变量)方式
           test1: null,  // null
           test2: undefined,  // undefined
           test3: true,    // Boolean
