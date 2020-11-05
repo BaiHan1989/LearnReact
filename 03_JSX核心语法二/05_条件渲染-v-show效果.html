@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+  // v-show效果：vue 中的写法，修改元素中display属性的值的效果，适用于频繁切换隐藏和显式
+
+  class App extends React.Component {
+
+    constructor() {
+      super()
+      this.state = {
+        isLogin: false
+      }
+    }
+
+    render() {
+      const {isLogin} = this.state
+      const displayValue = isLogin ? "block" : "none"
+      return (
+        <div>
+          <button onClick={e => this.loginClick()}>{isLogin ? "退出" : "登录"}</button>
+          <h2 style={{display: displayValue}}>你好啊，大兄弟</h2>
+        </div>
+      )
+    }
+
+    loginClick() {
+      this.setState({
+        isLogin: !this.state.isLogin
+      })
+    }
+  }
+
+  ReactDOM.render(<App/>, document.getElementById("app"))
+    
+  </script>
+</body>
+</html>
