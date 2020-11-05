@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+
+  <script type="text/babel">
+
+    class App extends React.Component {
+
+      constructor() {
+        super()
+        this.state = {
+          isLogin: false
+        }
+      }
+
+      render() {
+        const {isLogin} = this.state
+        // 1. 使用if判断
+        let message = null
+        let btnText = null
+        if (isLogin) {
+          message = <h2>欢迎回来~</h2>
+          btnText = "退出"
+        } else {
+          message = <h2>请先登录~</h2>
+          btnText = "登录"
+        }
+
+        return (
+          <div>
+            {message}
+            {/* 2. 三元运算符 */}
+            <button onClick={e => this.loginButtonClick()}>{isLogin ? "退出" : "登录"}</button>
+
+            <hr/>
+            {/* 3. 使用逻辑与 && */}
+            <h2>{isLogin && "你好啊，大兄弟"}</h2>
+          </div>
+        )
+      }
+
+      loginButtonClick() {
+        this.setState({
+          isLogin: !this.state.isLogin
+        })
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"))
+  </script>
+</body>
+</html>
