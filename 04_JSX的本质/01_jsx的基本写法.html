@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script>
+
+    // jsx -> babel -> React.createElement()
+    // jsx 其实是 React.createElement() 的语法糖
+    // const message = <h2>Hello React</h2>
+
+    // 从源码进行查看
+    // React.createElement() 函数就不需要babel进行jsx的转换了
+    const message2 = React.createElement("h2", null, "Hello React")
+    ReactDOM.render(message2, document.getElementById("app"))
+
+  </script>
+
+</body>
+</html>
