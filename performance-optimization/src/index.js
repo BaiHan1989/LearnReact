@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 
 // import App from './02_shouldComponentUpdate' // 性能优化-SCU
 
-import App from './03_PureComponent'
+// import App from './03_PureComponent'
+
+import App from './04_memo'
 
 ReactDOM.render(
   <App />,
