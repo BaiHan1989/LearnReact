@@ -27,7 +27,13 @@ export default class App extends PureComponent {
         <ul>
           {
             this.state.friends.map((item, index) => {
-              return <li key={item.name}>{item.name}</li>
+              return (
+                <li key={item.name}>
+                  姓名：{item.name} 
+                  年龄：{item.age}
+                  <button onClick={e => this.incrementAge(index)}>年龄+1</button>
+                </li>
+              )
             })
           }
         </ul>
@@ -49,6 +55,14 @@ export default class App extends PureComponent {
     const newFriends = [...this.state.friends]
     const friend = {name: "Bob", age: 20}
     newFriends.push(friend)
+    this.setState({
+      friends: newFriends
+    })
+  }
+
+  incrementAge(index) {
+    const newFriends = [...this.state.friends]
+    newFriends[index].age += 1
     this.setState({
       friends: newFriends
     })
