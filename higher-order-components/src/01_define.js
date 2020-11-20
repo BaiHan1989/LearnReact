@@ -10,6 +10,7 @@ class App extends PureComponent {
   }
 }
 
+// 返回类组件
 function higherOrderComponent(WrappedComponent) {
   class NewComponent extends PureComponent {
     render() {
@@ -21,6 +22,16 @@ function higherOrderComponent(WrappedComponent) {
   return NewComponent
 }
 
-const EnhancedComponent = higherOrderComponent(App)
+// 返回函数组件
+function higherOrderComponent2(WrappedComponent) {
+  function NewComponent(props) {
+    return <WrappedComponent {...props}/>
+  }
+
+  NewComponent.displayName = "HigherOrderCpn2"
+  return NewComponent
+}
+
+const EnhancedComponent = higherOrderComponent2(App)
 
 export default EnhancedComponent
