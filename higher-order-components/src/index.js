@@ -9,8 +9,10 @@ import ReactDOM from 'react-dom';
 
 // import App from './06_forward-ref' // forwardRef 高阶组件的使用
 
-import App from './07_portals' // portals 的使用
-import './index.css'
+// import App from './07_portals' // portals 的使用
+// import './index.css'
+
+import App from './08_fragment' // fragment的使用
 
 ReactDOM.render(
   <App name="Hello React" />,
