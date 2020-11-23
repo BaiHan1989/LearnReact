@@ -12,7 +12,9 @@ import ReactDOM from 'react-dom';
 // import App from './07_portals' // portals 的使用
 // import './index.css'
 
-import App from './08_fragment' // fragment的使用
+// import App from './08_fragment' // fragment的使用
+
+import App from './09_strict-mode'
 
 ReactDOM.render(
   <App name="Hello React" />,
