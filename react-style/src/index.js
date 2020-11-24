@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './01_inline-style/01_inline-style'; // 内联样式
 
-import App from './02_normal-css/app'
+// import App from './02_normal-css/app' // 普通样式
+
+import App from './03_css-module/app'
 
 ReactDOM.render(
   <React.StrictMode>
