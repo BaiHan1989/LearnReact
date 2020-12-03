@@ -19,7 +19,7 @@ export default class SwitchTransitionDemo extends PureComponent {
     const { isOn } = this.state
 
     return (
-      <div style={{textAlign: "center", padding: "30px"}}>
+      <div>
         <SwitchTransition mode="out-in">
           <CSSTransition
             key={isOn ? "on" : "off"}
