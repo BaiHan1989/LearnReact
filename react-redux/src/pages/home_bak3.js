@@ -1,16 +1,24 @@
 import React, { PureComponent } from 'react'
 
 import { connect } from "react-redux";
+import axios from 'axios'
 
 import {
   addAction,
-  getHomeMultiDataAction
+  addBannersAction,
+  addRecommendsAction
 } from '../store/actionCreator'
 
 class Home extends PureComponent {
 
   componentDidMount() {
-    this.props.getHomeMultiData()
+    axios({
+      url: "http://123.207.32.32:8000/home/multidata"
+    }).then(res => {
+      const data = res.data.data
+      this.props.addBanners(data.banner.list)
+      this.props.addRecommends(data.recommend.list)
+    })
   }
 
   render() {
@@ -38,8 +46,11 @@ const mapDispatchToProps = dispatch => ({
   addNumber(num) {
     dispatch(addAction(num))
   },
-  getHomeMultiData() {
-    dispatch(getHomeMultiDataAction)
+  addBanners(banners) {
+    dispatch(addBannersAction(banners))
+  },
+  addRecommends(recommends) {
+    dispatch(addRecommendsAction(recommends))
   }
 })
 

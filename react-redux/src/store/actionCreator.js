@@ -1,4 +1,6 @@
 
+import axios from 'axios'
+
 import {
   ADD_NUMBER,
   SUB_NUMBER,
@@ -29,3 +31,14 @@ export const addRecommendsAction = (recommends) => ({
   type: ADD_RECOMMENDS,
   recommends
 })
+
+export const getHomeMultiDataAction = (dispatch) => {
+  axios({
+    url: "http://123.207.32.32:8000/home/multidata"
+  }).then(res => {
+    const data = res.data.data
+    dispatch(addBannersAction(data.banner.list))
+    dispatch(addRecommendsAction(data.recommend.list))
+  })
+  
+}
