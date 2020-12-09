@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 创建生成器
+    // function* foo() {
+    //   console.log("111")
+    //   yield "Hello"
+    //   console.log("222")
+    //   yield "World"
+    //   console.log("333")
+    //   yield "Generator"
+    // }
+
+    // 获取迭代器iterator
+    // const it = foo()
+    // console.log(it)
+    // const res1 = it.next()
+    // console.log(res1)
+    // const res2 = it.next()
+    // console.log(res2)
+    // const res3 = it.next()
+    // console.log(res3)
+    // const res4 = it.next()
+    // console.log(res4)
+
+
+    function* bar() {
+      console.log("111")
+      const result = yield new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("Hello Generator")
+        }, 3000);
+      })
+      console.log(result)
+    }
+
+    const it = bar()
+    it.next().value.then(res => {
+      it.next(res)
+    })
+  </script>
+</body>
+</html>
