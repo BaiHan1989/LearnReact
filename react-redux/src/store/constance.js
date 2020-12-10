@@ -3,3 +3,5 @@ export const SUB_NUMBER = "SUB_NUMBER"
 
 export const ADD_BANNERS = "ADD_BANNERS"
 export const ADD_RECOMMENDS = "ADD_RECOMMENDS"
+
+export const FETCH_HOME_MULTIDATA = "FETCH_HOME_MULTIDATA"

@@ -5,7 +5,8 @@ import {
   ADD_NUMBER,
   SUB_NUMBER,
   ADD_BANNERS,
-  ADD_RECOMMENDS
+  ADD_RECOMMENDS,
+  FETCH_HOME_MULTIDATA
 } from './constance'
 
 export const addAction = (num) => {
@@ -41,4 +42,8 @@ export const getHomeMultiDataAction = (dispatch) => {
     dispatch(addRecommendsAction(data.recommend.list))
   })
   
+}
+
+export const fetchHomeMultidataAction = {
+  type: FETCH_HOME_MULTIDATA
 }
