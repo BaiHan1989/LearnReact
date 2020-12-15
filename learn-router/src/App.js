@@ -7,11 +7,15 @@ import {
   NavLink
 } from 'react-router-dom'
 
-import About from './pages/About'
-import Home from "./pages/Home"
-import Profile from './pages/Profile'
+import About from './pages/about'
+import Home from "./pages/home"
+import Profile from './pages/profile'
+import User from './pages/user'
+import NoMatch from './pages/noMatch'
 
 import './App.css'
+import { Switch } from 'react-router-dom/cjs/react-router-dom.min'
+import Login from './pages/login'
 
 export default class App extends PureComponent {
   render() {
@@ -31,11 +35,20 @@ export default class App extends PureComponent {
           <NavLink exact to="/" activeClassName="link-active">首页</NavLink>
           <NavLink to="/about" activeClassName="link-active">关于</NavLink>
           <NavLink to="/profile" activeClassName="link-active">我的</NavLink>
+          <NavLink to="/abc" activeClassName="link-active">abc</NavLink>
+          <NavLink to="/user" activeClassName="link-active">用户</NavLink>
 
+          {/* Switch 组件的作用 */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/profile" component={Profile} />
+            {/* <Route path="/:id" component={User} /> */}
+            <Route path="/user" component={User} />
+            <Route path="/login" component={Login} />
+            <Route component={NoMatch} />
+          </Switch>
 
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/profile" component={Profile} />
         </BrowserRouter>
       </div>
     )

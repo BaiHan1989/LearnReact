@@ -1,9 +1,9 @@
-a.active {
+a.active, a.link-active {
   color: red;
   font-size: 30px;
 }
 
-a.link-active {
+a.about-link {
   color: orange;
-  text-decoration: line-through;
+  font-size: 20px;
 }
