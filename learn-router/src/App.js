@@ -14,13 +14,16 @@ import Home from "./pages/home"
 import Profile from './pages/profile'
 import User from './pages/user'
 import NoMatch from './pages/noMatch'
-import Product from "./pages/product";
+import Product from "./pages/product"
+import Detail from './pages/detail'
 
 import './App.css'
 import Login from './pages/login'
 
 class App extends PureComponent {
   render() {
+    const id = "666"
+
     return (
       <div>
 
@@ -39,6 +42,7 @@ class App extends PureComponent {
         <NavLink to="/profile" activeClassName="link-active">我的</NavLink>
         <NavLink to="/abc" activeClassName="link-active">abc</NavLink>
         <NavLink to="/user" activeClassName="link-active">用户</NavLink>
+        <NavLink to={`/detail/${id}`} activeClassName="link-active">详情</NavLink>
         <button onClick={e => this.showProductList()}>商品列表</button>
 
         {/* Switch 组件的作用 */}
@@ -50,6 +54,7 @@ class App extends PureComponent {
           <Route path="/user" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/product" component={Product} />
+          <Route path="/detail/:id" component={Detail} />
           <Route component={NoMatch} />
         </Switch>
       </div>
