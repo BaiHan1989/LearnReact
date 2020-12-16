@@ -18,9 +18,12 @@ import Product from "./pages/product"
 import Detail from './pages/detail'
 import Detail2 from './pages/detail2'
 import Detail3 from './pages/detail3'
+import Login from './pages/login'
 
 import './App.css'
-import Login from './pages/login'
+
+import routes from './router'
+import { renderRoutes } from "react-router-config";
 
 class App extends PureComponent {
   render() {
@@ -43,7 +46,6 @@ class App extends PureComponent {
         <NavLink exact to="/" activeClassName="link-active">首页</NavLink>
         <NavLink to="/about" activeClassName="link-active">关于</NavLink>
         <NavLink to="/profile" activeClassName="link-active">我的</NavLink>
-        <NavLink to="/abc" activeClassName="link-active">abc</NavLink>
         <NavLink to="/user" activeClassName="link-active">用户</NavLink>
         <NavLink to={`/detail/${id}`} activeClassName="link-active">详情</NavLink>
         <NavLink to={`/detail2?name=ym&age=18`} activeClassName="link-active">详情2</NavLink>
@@ -59,11 +61,10 @@ class App extends PureComponent {
         <button onClick={e => this.showProductList()}>商品列表</button>
 
         {/* Switch 组件的作用 */}
-        <Switch>
+        {/* <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/profile" component={Profile} />
-          {/* <Route path="/:id" component={User} /> */}
           <Route path="/user" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/product" component={Product} />
@@ -71,7 +72,9 @@ class App extends PureComponent {
           <Route path="/detail2" component={Detail2} />
           <Route path="/detail3" component={Detail3} />
           <Route component={NoMatch} />
-        </Switch>
+        </Switch> */}
+
+        {renderRoutes(routes)}
       </div>
     )
   }
