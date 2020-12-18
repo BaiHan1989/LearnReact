@@ -10,6 +10,7 @@ import ComplexStateHook from './02_useState的使用/02_复杂状态的修改'
 import ClassCounterChangeTitle from './03_useEffect的使用/01_class实现title的修改'
 import HookCounterChangeTitle from './03_useEffect的使用/02_useEffect的hook实现title的修改'
 import EffectHookCancelDemo from './03_useEffect的使用/03_useEffect模拟订阅和取消订阅'
+import MultiEffectHookDemo from './03_useEffect的使用/04_多个useEffect一起使用'
 
 export default function App() {
 
@@ -27,8 +28,11 @@ export default function App() {
       {/* <ClassCounterChangeTitle /> */}
       {/* <HookCounterChangeTitle /> */}
 
-      {show && <EffectHookCancelDemo />}
-      <button onClick={e => setshow(!show)}>切换</button>
+      {/* {show && <EffectHookCancelDemo />}
+      <button onClick={e => setshow(!show)}>切换</button> */}
+
+      <MultiEffectHookDemo />
+
     </div>
   )
 }
