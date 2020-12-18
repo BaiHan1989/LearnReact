@@ -12,10 +12,10 @@ export default function App() {
     <div>
       {/* <CounterClass /> */}
       {/* <CounterHook /> */}
-      {/* <CounterHook2 /> */}
+      <CounterHook2 />
 
       {/* <MultiStateHook /> */}
-      <ComplexStateHook />
+      {/* <ComplexStateHook /> */}
     </div>
   )
 }
