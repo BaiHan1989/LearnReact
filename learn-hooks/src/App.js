@@ -20,6 +20,8 @@ import MemoHookDemo1 from './07_useMemo的使用/01_useMemo复杂计算的应用
 import MemoHookDemo2 from './07_useMemo的使用/02_useMemo传入子组件引用类型'
 import RefHookDemo1 from './08_useRef的使用/01_useRef引用DOM'
 import RefHookDemo2 from './08_useRef的使用/02_useRef引用其他数据'
+import ForwarRefDemo from './09_useImperativeHandle的使用/01_回顾forwardRef的用法'
+import ImperativeHookDemo from './09_useImperativeHandle的使用/02_useImperativeHandle的用法'
 
 export const UserContext = createContext()
 export const ThemeContext = createContext()
@@ -60,7 +62,10 @@ export default function App() {
       {/* <MemoHookDemo2 /> */}
 
       {/* <RefHookDemo1 /> */}
-      <RefHookDemo2 />
+      {/* <RefHookDemo2 /> */}
+
+      {/* <ForwarRefDemo /> */}
+      <ImperativeHookDemo />
     </div>
   )
 }
