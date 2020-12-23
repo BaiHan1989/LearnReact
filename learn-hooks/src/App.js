@@ -16,6 +16,8 @@ import ContextHookDemo from './04_useContext的使用/useContext的使用'
 import HomeReducer from './05_useReducer的使用/home'
 import ProfileReducer from './05_useReducer的使用/profile'
 import CallbackHookDemo from './06_useCallback的使用/useCallback进行性能优化'
+import MemoHookDemo1 from './07_useMemo的使用/01_useMemo复杂计算的应用'
+import MemoHookDemo2 from './07_useMemo的使用/02_useMemo传入子组件引用类型'
 
 export const UserContext = createContext()
 export const ThemeContext = createContext()
@@ -50,7 +52,10 @@ export default function App() {
       {/* <HomeReducer />
       <ProfileReducer /> */}
 
-      <CallbackHookDemo />
+      {/* <CallbackHookDemo /> */}
+
+      {/* <MemoHookDemo1 /> */}
+      <MemoHookDemo2 />
     </div>
   )
 }
