@@ -22,6 +22,8 @@ import RefHookDemo1 from './08_useRef的使用/01_useRef引用DOM'
 import RefHookDemo2 from './08_useRef的使用/02_useRef引用其他数据'
 import ForwarRefDemo from './09_useImperativeHandle的使用/01_回顾forwardRef的用法'
 import ImperativeHookDemo from './09_useImperativeHandle的使用/02_useImperativeHandle的用法'
+import EffectCountDemo from './10_useLayoutEffect的使用/01_useEffect修改count的值'
+import LayoutEffectCountDemo from './10_useLayoutEffect的使用/02_useLayoutEffect修改count的值'
 
 export const UserContext = createContext()
 export const ThemeContext = createContext()
@@ -65,7 +67,10 @@ export default function App() {
       {/* <RefHookDemo2 /> */}
 
       {/* <ForwarRefDemo /> */}
-      <ImperativeHookDemo />
+      {/* <ImperativeHookDemo /> */}
+
+      {/* <EffectCountDemo /> */}
+      <LayoutEffectCountDemo />
     </div>
   )
 }
