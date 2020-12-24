@@ -6,7 +6,7 @@ export default function LayoutEffectCountDemo() {
 
   useLayoutEffect(() => {
     if (count === 0) {
-      setCount(Math.random())
+      setCount(Math.random() + 200)
     }
   }, [count])
 

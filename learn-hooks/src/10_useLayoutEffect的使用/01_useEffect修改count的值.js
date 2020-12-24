@@ -6,9 +6,7 @@ export default function EffectCountDemo() {
 
   useEffect(() => {
     if (count === 0) {
-      setTimeout(() => {
-        setCount(Math.random())
-      }, 1000);
+      setCount(Math.random() + 200)
     }
   }, [count])
 

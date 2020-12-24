@@ -24,13 +24,17 @@ import ForwarRefDemo from './09_useImperativeHandle的使用/01_回顾forwardRef
 import ImperativeHookDemo from './09_useImperativeHandle的使用/02_useImperativeHandle的用法'
 import EffectCountDemo from './10_useLayoutEffect的使用/01_useEffect修改count的值'
 import LayoutEffectCountDemo from './10_useLayoutEffect的使用/02_useLayoutEffect修改count的值'
+import CustomHookDemo1 from './11_自定义Hook/01_认识自定义Hook'
+import CustomContextShareHook from './11_自定义Hook/02_自定义Hook练习-Context共享'
 
 export const UserContext = createContext()
+export const TokenContext = createContext()
+
 export const ThemeContext = createContext()
 
 export default function App() {
 
-  // const [show, setshow] = useState(true)
+  const [show, setshow] = useState(true)
 
   return (
     <div>
@@ -70,7 +74,17 @@ export default function App() {
       {/* <ImperativeHookDemo /> */}
 
       {/* <EffectCountDemo /> */}
-      <LayoutEffectCountDemo />
+      {/* <LayoutEffectCountDemo /> */}
+
+      {/* 自定义Hook */}
+      {/* {show && <CustomHookDemo1 />}
+      <button onClick={e => setshow(!show)}>切换</button> */}
+
+      <UserContext.Provider value={{name: "ym", age: 18}}>
+        <TokenContext.Provider value="ssdsaqe">
+          <CustomContextShareHook />
+        </TokenContext.Provider>
+      </UserContext.Provider>
     </div>
   )
 }
