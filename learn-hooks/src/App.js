@@ -26,6 +26,8 @@ import EffectCountDemo from './10_useLayoutEffect的使用/01_useEffect修改cou
 import LayoutEffectCountDemo from './10_useLayoutEffect的使用/02_useLayoutEffect修改count的值'
 import CustomHookDemo1 from './11_自定义Hook/01_认识自定义Hook'
 import CustomContextShareHook from './11_自定义Hook/02_自定义Hook练习-Context共享'
+import CustomScrollPositionHook from './11_自定义Hook/03_自定义Hook练习-获取滚动位置'
+import CustomDataStoreHook from './11_自定义Hook/04_自定义Hook练习-localStorage存储'
 
 export const UserContext = createContext()
 export const TokenContext = createContext()
@@ -80,11 +82,14 @@ export default function App() {
       {/* {show && <CustomHookDemo1 />}
       <button onClick={e => setshow(!show)}>切换</button> */}
 
-      <UserContext.Provider value={{name: "ym", age: 18}}>
+      {/* <UserContext.Provider value={{name: "ym", age: 18}}>
         <TokenContext.Provider value="ssdsaqe">
           <CustomContextShareHook />
         </TokenContext.Provider>
-      </UserContext.Provider>
+      </UserContext.Provider> */}
+
+      {/* <CustomScrollPositionHook /> */}
+      <CustomDataStoreHook />
     </div>
   )
 }
