@@ -26,6 +26,7 @@ export const HeaderLeft = styled.div`
     height: 69px;
     width: 177px;
     background-position: 0 0;
+    text-indent: -9999px;
   }
 
   .select-list {
