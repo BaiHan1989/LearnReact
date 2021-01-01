@@ -1,12 +1,21 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 
 import { discoverMenu } from '@/common/local-data'
 import { renderRoutes } from 'react-router-config';
+import request from '@/services/request'
 
 import { DiscoverWrapper, TopMenu } from "./style";
 import { NavLink } from 'react-router-dom';
 
 export default memo(function YMDiscovery(props) {
+
+  useEffect(() => {
+    request({
+      url: "/banner"
+    }).then(res => {
+      console.log(res)
+    })
+  }, [])
 
   const { route } = props
 
@@ -17,7 +26,7 @@ export default memo(function YMDiscovery(props) {
           {
             discoverMenu.map((item, index) => {
               return (
-                <div className="item">
+                <div className="item" key={item.title}>
                   <NavLink to={item.link}>{item.title}</NavLink>
                 </div>
               )
