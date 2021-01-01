@@ -5,15 +5,21 @@ import { HashRouter } from 'react-router-dom'
 
 import routers from './router'
 
+import store from './store'
+
+import { Provider } from 'react-redux'
 import YMAppHeader from '@/components/app-header'
 import YMAppFooter from '@/components/app-footer'
 
 export default memo(function App() {
   return (
-    <HashRouter>
-      <YMAppHeader />
-      {renderRoutes(routers)}
-      <YMAppFooter />
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <YMAppHeader />
+        {renderRoutes(routers)}
+        <YMAppFooter />
+      </HashRouter>
+    </Provider>
+
   )
 })

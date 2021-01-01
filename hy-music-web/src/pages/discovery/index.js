@@ -10,11 +10,6 @@ import { NavLink } from 'react-router-dom';
 export default memo(function YMDiscovery(props) {
 
   useEffect(() => {
-    request({
-      url: "/banner"
-    }).then(res => {
-      console.log(res)
-    })
   }, [])
 
   const { route } = props
