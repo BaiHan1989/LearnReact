@@ -1,29 +1,52 @@
 import React, { memo, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { getTopBannerAction } from './store/actionCreators'
 
 function YMRecommend(props) {
-  const { getBanners, topBanners } = props
+
+  // redux 和 组件关联：获取数据和进行操作
+  const dispatch = useDispatch()
+
+  const { topBanners } = useSelector(state => ({
+    topBanners: state.recommend.topBanners
+  }))
+
+  // 发送网络请求
   useEffect(() => {
-    getBanners()
-  }, [getBanners])
+    dispatch(getTopBannerAction())
+  }, [dispatch])
 
   return (
     <div>
-      <h2>YMRecommend: {topBanners.length}</h2>
+      <h2>YMRecommend:{topBanners.length}</h2>
     </div>
   )
 }
 
-const mapStateToProps = state => ({
-  topBanners: state.recommend.topBanners
-})
+export default memo(YMRecommend)
 
-const mapDispathToProps = dispatch => ({
-  getBanners: () => {
-    dispatch(getTopBannerAction())
-  }
-})
+// function YMRecommend(props) {
+//   const { getBanners, topBanners } = props
+//   useEffect(() => {
+//     getBanners()
+//   }, [getBanners])
 
-export default connect(mapStateToProps, mapDispathToProps)(memo(YMRecommend))
+//   return (
+//     <div>
+//       <h2>YMRecommend: {topBanners.length}</h2>
+//     </div>
+//   )
+// }
+
+// const mapStateToProps = state => ({
+//   topBanners: state.recommend.topBanners
+// })
+
+// const mapDispathToProps = dispatch => ({
+//   getBanners: () => {
+//     dispatch(getTopBannerAction())
+//   }
+// })
+
+// export default connect(mapStateToProps, mapDispathToProps)(memo(YMRecommend))
 

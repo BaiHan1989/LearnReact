@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
+  <script>
+    
+    // 数据的可变性
+    // const info = {
+    //   name: "ym",
+    //   age: 18,
+    //   friend: {
+    //     name: "yn",
+    //     age: 20
+    //   }
+    // }
+    // // 修改 info 中的数据，却改变了 obj 中的内容
+    // const obj = info
+    // info.name = "bh"
+    // console.log(obj)
+
+    const im = Immutable
+
+    // 可以利用 immutableJS 解决这个问题
+    const info = {
+      name: "ym",
+      age: 18,
+      friend: {
+        name: "cyn",
+        age: 20
+      }
+    }
+    // 对象类型
+    // const infoIM = im.Map(info)
+    // const objIM = infoIM.set("name", "bh")
+
+    // console.log(objIM.get("name"))
+    // console.log(infoIM.get("name"))
+
+    // 深层拷贝
+    const infoIM = im.fromJS(info)
+    console.log(infoIM)
+
+    // 数组类型
+    // const names = ["kobe", "james", "tatum"]
+
+    // const namesIM = im.List(names)
+    // const newNames = namesIM.set(0, "curry")
+    // console.log(namesIM.get(0))
+    // console.log(newNames.get(0))
+
+  </script>
+</body>
+</html>
