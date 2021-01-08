@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getTopBannerAction } from './store/actionCreators'
 
 function YMRecommend(props) {
@@ -8,8 +8,9 @@ function YMRecommend(props) {
   const dispatch = useDispatch()
 
   const { topBanners } = useSelector(state => ({
-    topBanners: state.recommend.topBanners
-  }))
+    // topBanners: state.get("recommend").get("topBanners")
+    topBanners: state.getIn(["recommend", "topBanners"])
+  }), shallowEqual)
 
   // 发送网络请求
   useEffect(() => {

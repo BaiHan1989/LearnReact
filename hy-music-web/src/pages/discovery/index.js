@@ -1,16 +1,12 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 
 import { discoverMenu } from '@/common/local-data'
 import { renderRoutes } from 'react-router-config';
-import request from '@/services/request'
 
 import { DiscoverWrapper, TopMenu } from "./style";
 import { NavLink } from 'react-router-dom';
 
 export default memo(function YMDiscovery(props) {
-
-  useEffect(() => {
-  }, [])
 
   const { route } = props
 
