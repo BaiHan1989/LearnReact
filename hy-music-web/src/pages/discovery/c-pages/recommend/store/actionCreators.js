@@ -1,4 +1,8 @@
-import { getTopBanners } from "@/services/recommend";
+import {
+  getTopBanners,
+  getHotRecommends
+} from "@/services/recommend";
+
 import * as actionTypes from "./constants"
 
 const changeTopBannersAction = (res) => ({
@@ -6,10 +10,23 @@ const changeTopBannersAction = (res) => ({
   topBanners: res.banners
 })
 
+const changeHotRecommendsAction = res => ({
+  type: actionTypes.CHANGE_HOT_RECOMMENDS,
+  hotRecommends: res.result
+})
+
 export const getTopBannerAction = () => {
   return dispatch => {
     getTopBanners().then(res => {
       dispatch(changeTopBannersAction(res))
+    })
+  }
+}
+
+export const getHotRecommendsAction = (limit) => {
+  return dispatch => {
+    getHotRecommends(limit).then(res => {
+      dispatch(changeHotRecommendsAction(res))
     })
   }
 }
