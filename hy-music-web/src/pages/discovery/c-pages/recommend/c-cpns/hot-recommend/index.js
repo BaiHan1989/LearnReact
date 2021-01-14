@@ -6,6 +6,7 @@ import { HOT_RECOMMEND_LIMIT } from "@/common/constants.js";
 
 import { getHotRecommendsAction } from "../../store/actionCreators";
 
+import YMSongsCover from '@/components/songs-cover'
 import YMThemeHeaderRCM from '@/components/theme-header-rcm'
 
 import {
@@ -34,7 +35,7 @@ export default memo(function YMHotRecommend() {
       <div className="recommend-list">
         {
           hotRecommends.map((item, index) => {
-            return <div>{item.name}</div>
+            return <YMSongsCover key={item.id} info={item} />
           })
         }
       </div>
