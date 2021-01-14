@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const SongsCoverWrapper = styled.div`
   width: 140px;
-  margin: 20px;
+  margin: 20px 0;
 
   .cover-top {
     position: relative;

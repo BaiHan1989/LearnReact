@@ -10,6 +10,7 @@ export const Content = styled.div`
 `
 
 export const RecommendLeft = styled.div`
+  padding: 20px;
   width: 729px;
 `
 
