@@ -6,6 +6,8 @@ import { getNewAlbumsAction } from "../../store/actionCreators";
 
 import { Carousel } from 'antd'
 import YMThemeHeaderRCM from '@/components/theme-header-rcm'
+import YMAlbumCover from '@/components/album-cover'
+
 import { AlbumWrapper } from "./style";
 
 export default memo(function YMNewAlbum() {
@@ -39,7 +41,15 @@ export default memo(function YMNewAlbum() {
                   <div key={item} className="page">
                     {
                       newAlbums.slice(item * 5, (item + 1) * 5).map((iten) => {
-                        return <div key={iten.id}>{iten.name}</div>
+                        return (
+                          <YMAlbumCover 
+                            key={iten.id} 
+                            info={iten} 
+                            size={100} 
+                            width={118} 
+                            bgp="-570px"
+                          />
+                        )
                       })
                     }
                   </div>
