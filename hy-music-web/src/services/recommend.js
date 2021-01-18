@@ -26,3 +26,13 @@ export function getNewAlbums(limit) {
     }
   })
 }
+
+// 请求排行
+export function getTopRanking(idx) {
+  return request({
+    url: "/top/list",
+    params: {
+      idx
+    }
+  })
+}
