@@ -1,4 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+
+import { getSongDetailAction } from "../store/actionCreators";
 
 import { Slider } from "antd";
 
@@ -10,6 +13,14 @@ import {
  } from './style'
 
 export default memo(function YMAppPlayerBar() {
+
+  const dispatch = useDispatch()
+
+  // other hooks
+  useEffect(() => {
+    dispatch(getSongDetailAction(167876))
+  }, [dispatch])
+
   return (
     <PlayerBarWrapper className="sprite_player">
       <div className="content wrap-v2">
