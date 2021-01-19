@@ -1,18 +1,25 @@
 import React, { memo, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import { getSizeImage, formatDate } from "@/utils/format-utils";
 
 import { getSongDetailAction } from "../store/actionCreators";
 
 import { Slider } from "antd";
 
-import { 
+import {
   PlayerBarWrapper,
   Control,
   PlayInfo,
   Operator
- } from './style'
+} from './style'
 
 export default memo(function YMAppPlayerBar() {
+
+  // readux hooks
+  const { songDetail } = useSelector(state => ({
+    songDetail: state.getIn(["player", "songDetail"])
+  }), shallowEqual)
 
   const dispatch = useDispatch()
 
@@ -20,6 +27,12 @@ export default memo(function YMAppPlayerBar() {
   useEffect(() => {
     dispatch(getSongDetailAction(167876))
   }, [dispatch])
+
+  
+  const imgUrl = (songDetail.al && songDetail.al.picUrl) || ""
+  const songName = songDetail && songDetail.name
+  const singerName = songDetail.ar && songDetail.ar[0].name
+  const duration = songDetail.dt && formatDate(songDetail.dt, "mm:ss")
 
   return (
     <PlayerBarWrapper className="sprite_player">
@@ -31,19 +44,19 @@ export default memo(function YMAppPlayerBar() {
         </Control>
         <PlayInfo>
           <div className="image">
-            <img src="http://p4.music.126.net/6V1CxVDfFu1Q3jIK6bMucg==/109951164418859263.jpg?param=34y34" alt=""/>
+            <img src={getSizeImage(imgUrl, 35)} alt="" />
           </div>
           <div className="info">
             <div className="song">
-              <span className="song-name"></span>
-              <a href="#/" className="singer-name">王菲</a>
+              <span className="song-name">{songName}</span>
+              <a href="#/" className="singer-name">{singerName}</a>
             </div>
             <div className="progress">
               <Slider />
               <div className="time">
                 <span className="now-time">02:03</span>
                 <span className="divider">/</span>
-                <span className="duration">04:30</span>
+                <span className="duration">{duration}</span>
               </div>
             </div>
           </div>
