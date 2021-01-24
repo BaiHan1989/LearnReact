@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { getSizeImage, formatDate, getPlaySong } from "@/utils/format-utils";
@@ -17,7 +17,13 @@ import {
 export default memo(function YMAppPlayerBar() {
 
   // 当前时间
-  const [currentTime, setcurrentTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+
+  // 进度
+  const [progress, setProgress] = useState(0)
+
+  // 是否正在改变进度
+  const [isChanging, setIsChanging] = useState(false)
 
   // readux hooks
   const { songDetail } = useSelector(state => ({
@@ -38,9 +44,8 @@ export default memo(function YMAppPlayerBar() {
   const imgUrl = (songDetail.al && songDetail.al.picUrl) || ""
   const songName = songDetail && songDetail.name
   const singerName = songDetail.ar && songDetail.ar[0].name
-  const duration = songDetail.dt && formatDate(songDetail.dt, "mm:ss")
+  const duration = songDetail && songDetail.dt
   const currentDuration = formatDate(currentTime * 1000, "mm:ss")
-  const progress = (currentTime * 1000 / songDetail.dt) * 100
 
   const playMusic = () => {
     audioRef.current.src = getPlaySong(songDetail.id)
@@ -48,8 +53,32 @@ export default memo(function YMAppPlayerBar() {
   }
 
   const timeUpdate = (e) => {
-    setcurrentTime(e.target.currentTime)
+    if (!isChanging) {
+      // 设置当前时间
+      setCurrentTime(e.target.currentTime)
+      // 设置当前进度
+      setProgress(currentTime * 1000 / duration * 100)
+    }
   }
+
+  // 滑块滑动时调用
+  const sliderChange = useCallback((value) => {
+    // 修改进度值
+    setProgress(value)
+    const currentTime = value / 100 * duration
+    setCurrentTime(currentTime / 1000)
+    setIsChanging(true)
+  }, [duration])
+
+  // 松开鼠标时调用
+  const afterChange = useCallback((value) => {
+
+    // 设置当前播放时间
+    const currentTime = (value / 100 * duration) / 1000
+    audioRef.current.currentTime = currentTime
+    setCurrentTime(currentTime)
+    setIsChanging(false)
+  }, [duration])
 
   return (
     <PlayerBarWrapper className="sprite_player">
@@ -69,11 +98,15 @@ export default memo(function YMAppPlayerBar() {
               <a href="#/" className="singer-name">{singerName}</a>
             </div>
             <div className="progress">
-              <Slider value={progress} />
+              <Slider
+                value={progress}
+                onChange={sliderChange}
+                onAfterChange={afterChange}
+              />
               <div className="time">
                 <span className="now-time">{currentDuration}</span>
                 <span className="divider">/</span>
-                <span className="duration">{duration}</span>
+                <span className="duration">{formatDate(duration, "mm:ss")}</span>
               </div>
             </div>
           </div>
