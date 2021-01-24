@@ -25,6 +25,9 @@ export default memo(function YMAppPlayerBar() {
   // 是否正在改变进度
   const [isChanging, setIsChanging] = useState(false)
 
+  // 是否正在播放
+  const [isPlaying, setIsPlaying] = useState(false)
+
   // readux hooks
   const { songDetail } = useSelector(state => ({
     songDetail: state.getIn(["player", "songDetail"])
@@ -40,6 +43,9 @@ export default memo(function YMAppPlayerBar() {
     dispatch(getSongDetailAction(167876))
   }, [dispatch])
 
+  useEffect(() => {
+    audioRef.current.src = getPlaySong(songDetail.id)
+  }, [songDetail])
 
   const imgUrl = (songDetail.al && songDetail.al.picUrl) || ""
   const songName = songDetail && songDetail.name
@@ -48,8 +54,8 @@ export default memo(function YMAppPlayerBar() {
   const currentDuration = formatDate(currentTime * 1000, "mm:ss")
 
   const playMusic = () => {
-    audioRef.current.src = getPlaySong(songDetail.id)
-    audioRef.current.play()
+    isPlaying ? audioRef.current.pause() : audioRef.current.play()
+    setIsPlaying(!isPlaying)
   }
 
   const timeUpdate = (e) => {
@@ -74,16 +80,22 @@ export default memo(function YMAppPlayerBar() {
   const afterChange = useCallback((value) => {
 
     // 设置当前播放时间
-    const currentTime = (value / 100 * duration) / 1000
+    const currentTime = value / 100 * duration / 1000
     audioRef.current.currentTime = currentTime
     setCurrentTime(currentTime)
     setIsChanging(false)
+
+    // 如果是暂停状态继续播放
+    if (!isPlaying) {
+      playMusic()
+    }
+
   }, [duration])
 
   return (
     <PlayerBarWrapper className="sprite_player">
       <div className="content wrap-v2">
-        <Control>
+        <Control isPlaying={isPlaying}>
           <button className="sprite_player prev"></button>
           <button className="sprite_player play" onClick={e => playMusic()}></button>
           <button className="sprite_player next"></button>
