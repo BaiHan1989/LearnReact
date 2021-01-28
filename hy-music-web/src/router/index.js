@@ -8,6 +8,7 @@ import YMSongs from '@/pages/discovery/c-pages/songs'
 import YMDjradio from '@/pages/discovery/c-pages/djradio'
 import YMArtist from '@/pages/discovery/c-pages/artist'
 import YMAlbum from '@/pages/discovery/c-pages/album'
+import YMPlayer from '@/pages/player'
 
 
 import { Redirect } from 'react-router-dom'
@@ -54,6 +55,10 @@ const routers = [
       {
         path: "/discover/album",
         component: YMAlbum
+      },
+      {
+        path: "/discover/player",
+        component: YMPlayer
       }
     ]
   },
@@ -64,7 +69,8 @@ const routers = [
   {
     path: "/friend",
     component: YMFriend
-  }
+  },
+  
 ]
 
 export default routers

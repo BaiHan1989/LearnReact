@@ -5,6 +5,7 @@ import { getSizeImage, formatDate, getPlaySong } from "@/utils/format-utils";
 
 import { getSongDetailAction } from "../store/actionCreators";
 
+import { NavLink } from "react-router-dom";
 import { Slider } from "antd";
 
 import {
@@ -53,10 +54,10 @@ export default memo(function YMAppPlayerBar() {
   const duration = songDetail && songDetail.dt
   const currentDuration = formatDate(currentTime * 1000, "mm:ss")
 
-  const playMusic = () => {
+  const playMusic = useCallback(() => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play()
     setIsPlaying(!isPlaying)
-  }
+  }, [isPlaying])
 
   const timeUpdate = (e) => {
     if (!isChanging) {
@@ -90,7 +91,7 @@ export default memo(function YMAppPlayerBar() {
       playMusic()
     }
 
-  }, [duration])
+  }, [duration, isPlaying, playMusic])
 
   return (
     <PlayerBarWrapper className="sprite_player">
@@ -102,7 +103,9 @@ export default memo(function YMAppPlayerBar() {
         </Control>
         <PlayInfo>
           <div className="image">
-            <img src={getSizeImage(imgUrl, 35)} alt="" />
+            <NavLink to="/discover/player">
+              <img src={getSizeImage(imgUrl, 35)} alt="" />
+            </NavLink>
           </div>
           <div className="info">
             <div className="song">
