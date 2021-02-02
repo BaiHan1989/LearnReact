@@ -5,7 +5,8 @@ import { getSizeImage, formatDate, getPlaySong } from "@/utils/format-utils";
 
 import { 
   getSongDetailAction,
-  changeSequenceAction
+  changeSequenceAction,
+  changeCurrentIndexAndSongAction
 } from "../store/actionCreators";
 
 import { NavLink } from "react-router-dom";
@@ -50,6 +51,11 @@ export default memo(function YMAppPlayerBar() {
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(songDetail.id)
+    audioRef.current.play().then(res => {
+      setIsPlaying(true)
+    }).catch(err => {
+      setIsPlaying(false)
+    })
   }, [songDetail])
 
   const imgUrl = (songDetail.al && songDetail.al.picUrl) || ""
@@ -72,12 +78,25 @@ export default memo(function YMAppPlayerBar() {
     }
   }
 
+  const changeMusic = tag => {
+    dispatch(changeCurrentIndexAndSongAction(tag))
+  }
+
   const changeCurrentSequence = () => {
     let currentSequence = sequence + 1
     if (currentSequence > 2) {
       currentSequence = 0
     }
     dispatch(changeSequenceAction(currentSequence))
+  }
+
+  const handleMusicEnded = () => {
+    if (sequence === 2) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+    } else {
+      dispatch(changeCurrentIndexAndSongAction(1))
+    }
   }
 
   // 滑块滑动时调用
@@ -109,9 +128,9 @@ export default memo(function YMAppPlayerBar() {
     <PlayerBarWrapper className="sprite_player">
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
-          <button className="sprite_player prev"></button>
+          <button className="sprite_player prev" onClick={e => changeMusic(-1)}></button>
           <button className="sprite_player play" onClick={e => playMusic()}></button>
-          <button className="sprite_player next"></button>
+          <button className="sprite_player next" onClick={e => changeMusic(1)}></button>
         </Control>
         <PlayInfo>
           <div className="image">
@@ -150,7 +169,7 @@ export default memo(function YMAppPlayerBar() {
           </div>
         </Operator>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+      <audio ref={audioRef} onTimeUpdate={e => timeUpdate(e)} onEnded={e => handleMusicEnded()} />
     </PlayerBarWrapper>
   )
 })
