@@ -3,7 +3,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { getSizeImage, formatDate, getPlaySong } from "@/utils/format-utils";
 
-import { getSongDetailAction } from "../store/actionCreators";
+import { 
+  getSongDetailAction,
+  changeSequenceAction
+} from "../store/actionCreators";
 
 import { NavLink } from "react-router-dom";
 import { Slider } from "antd";
@@ -30,8 +33,9 @@ export default memo(function YMAppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   // readux hooks
-  const { songDetail } = useSelector(state => ({
-    songDetail: state.getIn(["player", "songDetail"])
+  const { songDetail, sequence } = useSelector(state => ({
+    songDetail: state.getIn(["player", "songDetail"]),
+    sequence: state.getIn(["player", "sequence"])
   }), shallowEqual)
 
   const dispatch = useDispatch()
@@ -66,6 +70,14 @@ export default memo(function YMAppPlayerBar() {
       // 设置当前进度
       setProgress(currentTime * 1000 / duration * 100)
     }
+  }
+
+  const changeCurrentSequence = () => {
+    let currentSequence = sequence + 1
+    if (currentSequence > 2) {
+      currentSequence = 0
+    }
+    dispatch(changeSequenceAction(currentSequence))
   }
 
   // 滑块滑动时调用
@@ -126,14 +138,14 @@ export default memo(function YMAppPlayerBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator sequence={sequence}>
           <div className="left">
             <button className="sprite_player btn favor"></button>
             <button className="sprite_player btn share"></button>
           </div>
           <div className="right sprite_player">
             <button className="sprite_player btn volume"></button>
-            <button className="sprite_player btn loop"></button>
+            <button className="sprite_player btn loop" onClick={e => changeCurrentSequence()}></button>
             <button className="sprite_player btn playlist"></button>
           </div>
         </Operator>

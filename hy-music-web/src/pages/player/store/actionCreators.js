@@ -17,6 +17,11 @@ const changeSongDetailAction = songDetail => ({
   songDetail
 })
 
+export const changeSequenceAction = (sequence) => ({
+  type: actionTypes.CHANGE_SEQUENCE,
+  sequence
+})
+
 export const getSongDetailAction = (ids) => {
 
   return (dispatch, getState) => {
@@ -33,6 +38,7 @@ export const getSongDetailAction = (ids) => {
       getSongDetail(ids).then(res => {
         // 将歌曲添加到歌单
         const song = res.songs && res.songs[0]
+        if (!song) return
         const newPlayList = [...playList]
         newPlayList.push(song)
         dispatch(changePlayListAction(newPlayList))
