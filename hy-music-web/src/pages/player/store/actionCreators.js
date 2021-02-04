@@ -1,7 +1,8 @@
 
-import { getSongDetail } from "@/services/player"
+import { getSongDetail, getLyric } from "@/services/player"
 import * as actionTypes from './constants'
 import { getRandomNumber } from "@/utils/math-utils";
+import { parseLyric } from "@/utils/parse-lyric";
 
 const changePlayListAction = playList => ({
   type: actionTypes.CHANGE_PLAY_LIST,
@@ -16,6 +17,11 @@ const changeCurrentSongIndexAction = index => ({
 const changeSongDetailAction = songDetail => ({
   type: actionTypes.CHANGE_SONG_DETAIL,
   songDetail
+})
+
+const changeLyricListAction = lyricList => ({
+  type: actionTypes.CHANGE_LYRIC_LIST,
+  lyricList
 })
 
 export const changeCurrentIndexAndSongAction = (tag) => {
@@ -41,6 +47,9 @@ export const changeCurrentIndexAndSongAction = (tag) => {
     const currentSong = playList[currentSongIndex]
     dispatch(changeSongDetailAction(currentSong))
     dispatch(changeCurrentSongIndexAction(currentSongIndex))
+
+    // 请求歌词
+    dispatch(getLyricAction(currentSong.id))
   }
 }
 
@@ -60,6 +69,7 @@ export const getSongDetailAction = (ids) => {
       dispatch(changeCurrentSongIndexAction(songIndex))
       const song = playList[songIndex]
       dispatch(changeSongDetailAction(song))
+      dispatch(getLyricAction(song.id))
     } else {
       // 歌单中没有该歌曲
       getSongDetail(ids).then(res => {
@@ -71,7 +81,19 @@ export const getSongDetailAction = (ids) => {
         dispatch(changePlayListAction(newPlayList))
         dispatch(changeCurrentSongIndexAction(newPlayList.length - 1))
         dispatch(changeSongDetailAction(song))
+        dispatch(getLyricAction(song.id))
       })
     }
+  }
+}
+
+// 请求歌词
+export const getLyricAction = id => {
+  return dispatch => {
+    getLyric(id).then(res => {
+      const lyric = res.lrc.lyric
+      const lyricList = parseLyric(lyric)
+      dispatch(changeLyricListAction(lyricList))
+    })
   }
 }
