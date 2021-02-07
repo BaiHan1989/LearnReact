@@ -6,11 +6,12 @@ import { getSizeImage, formatDate, getPlaySong } from "@/utils/format-utils";
 import { 
   getSongDetailAction,
   changeSequenceAction,
-  changeCurrentIndexAndSongAction
+  changeCurrentIndexAndSongAction,
+  changeCurrentLyricIndexAction
 } from "../store/actionCreators";
 
 import { NavLink } from "react-router-dom";
-import { Slider } from "antd";
+import { Slider, message } from "antd";
 
 import {
   PlayerBarWrapper,
@@ -34,10 +35,11 @@ export default memo(function YMAppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   // readux hooks
-  const { songDetail, sequence, lyricList} = useSelector(state => ({
+  const { songDetail, sequence, lyricList, currentLyricIndex } = useSelector(state => ({
     songDetail: state.getIn(["player", "songDetail"]),
     sequence: state.getIn(["player", "sequence"]),
-    lyricList: state.getIn(["player", "lyricList"])
+    lyricList: state.getIn(["player", "lyricList"]),
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
   }), shallowEqual)
 
   const dispatch = useDispatch()
@@ -88,7 +90,16 @@ export default memo(function YMAppPlayerBar() {
         break
       }
     }
-    console.log(lyricList[i - 1])
+    if (currentLyricIndex !== i - 1) {
+      dispatch(changeCurrentLyricIndexAction(i - 1))
+      const content = lyricList[i - 1] && lyricList[i - 1].content
+      message.open({
+        content,
+        duration: 0,
+        key: "lyric",
+        className: "lyric-class"
+      })
+    }
   }
 
   const changeMusic = tag => {
