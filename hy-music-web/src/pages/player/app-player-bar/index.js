@@ -34,9 +34,10 @@ export default memo(function YMAppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   // readux hooks
-  const { songDetail, sequence } = useSelector(state => ({
+  const { songDetail, sequence, lyricList} = useSelector(state => ({
     songDetail: state.getIn(["player", "songDetail"]),
-    sequence: state.getIn(["player", "sequence"])
+    sequence: state.getIn(["player", "sequence"]),
+    lyricList: state.getIn(["player", "lyricList"])
   }), shallowEqual)
 
   const dispatch = useDispatch()
@@ -70,12 +71,24 @@ export default memo(function YMAppPlayerBar() {
   }, [isPlaying])
 
   const timeUpdate = (e) => {
+    const currentTime = e.target.currentTime
     if (!isChanging) {
       // 设置当前时间
-      setCurrentTime(e.target.currentTime)
+      setCurrentTime(currentTime)
       // 设置当前进度
       setProgress(currentTime * 1000 / duration * 100)
     }
+
+    // 切换歌词
+    let i = 0
+    for (; i < lyricList.length; i++) {
+      const lyric = lyricList[i]
+      // 如果当前时间小于歌词的时间，匹配到歌词
+      if (currentTime * 1000 < lyric.time) {
+        break
+      }
+    }
+    console.log(lyricList[i - 1])
   }
 
   const changeMusic = tag => {
